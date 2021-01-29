@@ -1,0 +1,96 @@
+version: '3.7'
+services:
+  frontend:
+    environment:
+      - EMBER_ENVIRONMENT=${ENVIRONMENT}
+      - BACKEND_SERVICE_PORT=${BACKEND_HOST_PORT}
+    # Keep the stdin open, so we can attach to our app container's process
+    # and do things such as debugging, etc
+    stdin_open: true
+    # Enable sending signals (CTRL+C, CTRL+P + CTRL+Q) into the container
+    tty: true
+  backend:
+    env_file:
+      - secrets.env
+    depends_on:
+      - db
+    environment:
+      - RAILS_ENV=${ENVIRONMENT}
+      - RAILS_PORT=${RAILS_PORT}
+      - RAILS_SECRET_KEY_BASE=${RAILS_SECRET_KEY_BASE}
+      - RAILS_DB_HOST=${DB_HOST}
+      - RAILS_DB_PORT=${DB_PORT}
+      - RAILS_DB=${DB_NAME}
+      - RAILS_DB_USER=${DB_USER}
+      - RAILS_DB_PASSWORD=${DB_PASSWORD}
+      - ILL_SECRET_ACCESS_TOKEN=${BACKEND_ACCESS_TOKEN}
+      - ILL_EMAIL_SUBJECT_PREFIX=${BACKEND_EMAIL_SUBJECT_PREFIX}
+      - ILL_KOHA_SVC_URL=${KOHA_SVC_URL}
+      - ILL_KOHA_USER=${KOHA_USER}
+    networks:
+      - backend
+    ports:
+      - ${BACKEND_HOST_PORT}:${RAILS_PORT}
+  db:
+    restart: always
+    environment:
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    command: ["postgres", "-c", "config_file=/etc/postgresql/postgresql.conf"]
+    volumes:
+      - ./postgres-initdb.d:/docker-entrypoint-initdb.d
+      - dbdata:/var/lib/postgresql/data
+    networks:
+      - backend
+  forms_frontend:
+    environment:
+      - EMBER_ENVIRONMENT=${ENVIRONMENT}
+      - BACKEND_SERVICE_PORT=${FORMS_BACKEND_HOST_PORT}
+      - FJARRKONTROLLEN_BACKEND_SERVICE_PORT=${BACKEND_HOST_PORT}
+    # Keep the stdin open, so we can attach to our app container's process
+    # and do things such as debugging, etc
+    stdin_open: true
+    # Enable sending signals (CTRL+C, CTRL+P + CTRL+Q) into the container
+    tty: true
+  forms_backend:
+    depends_on:
+      - db
+    env_file:
+      - secrets.env
+    environment:
+      - RAILS_ENV=${ENVIRONMENT}
+      - RAILS_PORT=${RAILS_PORT}
+      - RAILS_SECRET_KEY_BASE=${RAILS_SECRET_KEY_BASE}
+      - RAILS_DB_HOST=${FORMS_DB_HOST}
+      - RAILS_DB_PORT=${FORMS_DB_PORT}
+      - RAILS_DB=${FORMS_DB_NAME}
+      - RAILS_DB_USER=${FORMS_DB_USER}
+      - RAILS_DB_PASSWORD=${FORMS_DB_PASSWORD}
+      - FJARRKONTROLLEN_SERVER_URL=${FORMS_FJARRKONTROLLEN_SERVER_URL}
+      - FJARRKONTROLLEN_SERVER_ACCESS_TOKEN=${BACKEND_ACCESS_TOKEN}
+      - FORMS_KOHA_SVC_URL=${KOHA_SVC_URL}
+      - FORMS_KOHA_USER=${FORMS_KOHA_USER}
+    networks:
+      - forms_backend
+    ports:
+      - ${FORMS_BACKEND_HOST_PORT}:${RAILS_PORT}
+  forms_db:
+    restart: always
+    environment:
+      - POSTGRES_DB=${FORMS_DB_NAME}
+      - POSTGRES_USER=${FORMS_DB_USER}
+      - POSTGRES_PASSWORD=${FORMS_DB_PASSWORD}
+    command: ["postgres", "-c", "config_file=/etc/postgresql/postgresql.conf"]
+    volumes:
+      - ./forms-postgres-initdb.d:/docker-entrypoint-initdb.d
+      - forms_dbdata:/var/lib/postgresql/data
+    networks:
+      - forms_backend
+
+networks:
+  backend:
+  forms_backend:
+volumes:
+  dbdata:
+  forms_dbdata:

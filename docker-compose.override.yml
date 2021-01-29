@@ -1,0 +1,56 @@
+# try messing with stdin_open and tty to find out correct setting
+version: '3.7'
+services:
+  frontend:
+    image: docker.ub.gu.se/ember-dev:3.14.0
+    ports:
+      # server
+      - ${FRONTEND_HOST_PORT}:4200
+      # livereload
+      - 7020:7020
+      # Tests in browser
+      - 7357:7357
+    volumes:
+      - ${FJARRKONTROLLEN_FRONTEND_REPO}:/home/node/app
+  backend:
+    image: docker.ub.gu.se/rails:ruby-2.5.8
+    env_file:
+      - secrets.env
+    volumes:
+      - $FJARRKONTROLLEN_BACKEND_REPO:/usr/src/app
+    command: ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
+  db:
+    image: postgres:9.4
+    volumes:
+      - $FJARRKONTROLLEN_BACKEND_REPO/docker/build/postgres/postgres.conf:/etc/postgresql/postgresql.conf
+  forms_frontend:
+    image: docker.ub.gu.se/ember-dev:3.14.0
+    environment:
+      - FORMS_CAS_URL=http://localhost:8383/cas
+    ports:
+      # server
+      - ${FORMS_FRONTEND_HOST_PORT}:4200
+      # livereload
+      - 7021:7020
+      # Tests in browser
+      - 7358:7357
+      # FIX PORTS!
+    volumes:
+      - ${FJARRKONTROLLEN_FORMS_REPO}/frontend:/home/node/app
+  forms_backend:
+    image: docker.ub.gu.se/rails:ruby-2.5.8
+    env_file:
+      - secrets.env
+    environment:
+      - FORMS_CAS_URL=http://cas_mock_server:8383/cas
+    volumes:
+      - $FJARRKONTROLLEN_FORMS_REPO:/usr/src/app
+    command: ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
+  forms_db:
+    image: postgres:9.4
+    volumes:
+      - $FJARRKONTROLLEN_FORMS_REPO/docker/build/postgres/postgres.conf:/etc/postgresql/postgresql.conf
+  cas_mock_server:
+    image: soulwing/cas-mock-server
+    ports:
+      - 8383:8080
