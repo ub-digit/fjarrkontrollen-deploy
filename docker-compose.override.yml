@@ -42,7 +42,7 @@ services:
     env_file:
       - secrets.env
     environment:
-      - FORMS_CAS_URL=http://cas_mock_server:8383/cas
+      - FORMS_CAS_URL=http://cas:8080/cas
     volumes:
       - $FJARRKONTROLLEN_FORMS_REPO:/usr/src/app
     command: ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
@@ -50,7 +50,10 @@ services:
     image: postgres:9.4
     volumes:
       - $FJARRKONTROLLEN_FORMS_REPO/docker/build/postgres/postgres.conf:/etc/postgresql/postgresql.conf
-  cas_mock_server:
+  cas:
     image: soulwing/cas-mock-server
     ports:
       - 8383:8080
+    networks:
+      - forms_backend
+      - backend

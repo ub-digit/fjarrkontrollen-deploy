@@ -70,9 +70,10 @@ services:
       - FJARRKONTROLLEN_SERVER_URL=${FORMS_FJARRKONTROLLEN_SERVER_URL}
       - FJARRKONTROLLEN_SERVER_ACCESS_TOKEN=${BACKEND_ACCESS_TOKEN}
       - FORMS_KOHA_SVC_URL=${KOHA_SVC_URL}
-      - FORMS_KOHA_USER=${FORMS_KOHA_USER}
+      - FORMS_KOHA_USER=${KOHA_USER}
     networks:
       - forms_backend
+      - backend
     ports:
       - ${FORMS_BACKEND_HOST_PORT}:${RAILS_PORT}
   forms_db:
