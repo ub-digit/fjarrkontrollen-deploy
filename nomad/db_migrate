@@ -1,0 +1,11 @@
+#!/bin/bash
+
+source validate_stage.sh
+
+levant render \
+  -var-file=vars/app.yml \
+  -var-file=vars/secrets.yml \
+  -var-file=vars/db_migrate.yml \
+  -var-file=vars/$1.yml \
+  templates/bash-template.nomad > jobs/db-migrate.nomad \
+  && nomad job run jobs/db-migrate.nomad

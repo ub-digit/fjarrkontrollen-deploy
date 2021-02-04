@@ -1,0 +1,6 @@
+---
+# Docker container internal ports
+ports:
+  fjarrkontrollen_frontend_port: 8080
+  fjarrkontrollen_rails_port: 3000
+  fjarrkontrollen_postgres_port: 5432

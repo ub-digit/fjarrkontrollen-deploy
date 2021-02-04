@@ -1,0 +1,10 @@
+#!/bin/bash
+
+source validate_stage.sh
+
+levant render \
+  -var-file=vars/app.yml \
+  -var-file=vars/secrets.yml \
+  -var-file=vars/$1.yml \
+  templates/deploy-template.nomad > jobs/deploy.nomad \
+  && nomad job run jobs/deploy.nomad

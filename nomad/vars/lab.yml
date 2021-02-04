@@ -1,0 +1,10 @@
+---
+deploy:
+  stage: lab
+  frontend_git_revision: release-2021.02.02.002
+  backend_git_revision: release-2021.02.02.001
+  forms_git_revision: release-2021.02.02.001
+  frontend_hostname: fjarrkontrollen-lab.ub.gu.se
+  backend_hostname: fjarrkontrollen-server-lab.ub.gu.se
+  forms_frontend_hostname: fjarrlan-lab.ub.gu.se
+  forms_backend_hostname: fjarrlan-server-lab.ub.gu.se
