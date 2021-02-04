@@ -3,6 +3,8 @@ version: '3.7'
 services:
   frontend:
     image: docker.ub.gu.se/ember-dev:3.14.0
+    environemnt:
+      - BACKEND_SERVICE_PORT=${BACKEND_HOST_PORT}
     ports:
       # server
       - ${FRONTEND_HOST_PORT}:4200
@@ -27,6 +29,8 @@ services:
     image: docker.ub.gu.se/ember-dev:3.14.0
     environment:
       - FORMS_CAS_URL=http://localhost:8383/cas
+      - BACKEND_SERVICE_PORT=${FORMS_BACKEND_HOST_PORT}
+      - FJARRKONTROLLEN_BACKEND_SERVICE_PORT=${BACKEND_HOST_PORT}
     ports:
       # server
       - ${FORMS_FRONTEND_HOST_PORT}:4200

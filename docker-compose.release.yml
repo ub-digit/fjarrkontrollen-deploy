@@ -2,6 +2,9 @@ version: '3.7'
 services:
   frontend:
     image: docker.ub.gu.se/fjarrkontrollen-frontend:${FRONTEND_GIT_REVISION}
+    environment:
+      - BACKEND_SERVICE_HOSTNAME=${BACKEND_HOSTNAME}
+      - KOHA_SEARCH_URL=${KOHA_SEARCH_URL}
     ports:
       - ${FRONTEND_HOST_PORT}:8080
   backend:
@@ -10,6 +13,9 @@ services:
     image: docker.ub.gu.se/fjarrkontrollen-postgres:${BACKEND_GIT_REVISION}
   forms_frontend:
     image: docker.ub.gu.se/fjarrkontrollen-forms-frontend:${FORMS_GIT_REVISION}
+    environment:
+      - BACKEND_SERVICE_HOSTNAME=${FORMS_BACKEND_HOSTNAME}
+      - FJARRKONTROLLEN_BACKEND_SERVICE_HOSTNAME=${BACKEND_HOSTNAME}
     ports:
       - ${FORMS_FRONTEND_HOST_PORT}:8080
   forms_backend:

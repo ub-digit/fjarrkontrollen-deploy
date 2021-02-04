@@ -3,7 +3,6 @@ services:
   frontend:
     environment:
       - EMBER_ENVIRONMENT=${ENVIRONMENT}
-      - BACKEND_SERVICE_PORT=${BACKEND_HOST_PORT}
     # Keep the stdin open, so we can attach to our app container's process
     # and do things such as debugging, etc
     stdin_open: true
@@ -46,8 +45,6 @@ services:
   forms_frontend:
     environment:
       - EMBER_ENVIRONMENT=${ENVIRONMENT}
-      - BACKEND_SERVICE_PORT=${FORMS_BACKEND_HOST_PORT}
-      - FJARRKONTROLLEN_BACKEND_SERVICE_PORT=${BACKEND_HOST_PORT}
     # Keep the stdin open, so we can attach to our app container's process
     # and do things such as debugging, etc
     stdin_open: true
