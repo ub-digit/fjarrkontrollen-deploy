@@ -8,7 +8,11 @@ services:
     image: docker.ub.gu.se/fjarrkontrollen-backend:${BACKEND_GIT_REVISION}
   db:
     image: docker.ub.gu.se/fjarrkontrollen-postgres:${BACKEND_GIT_REVISION}
-#  forms_frontend:
-#    image: docker.ub.gu.se/fjarrkontrollen-forms-frontend:${FORMS_GIT_REVISION}
-#  forms_backend:
-#    image: docker.ub.gu.se/fjarrkontrollen-forms-backend:${FORMS_GIT_REVISION}
+  forms_frontend:
+    image: docker.ub.gu.se/fjarrkontrollen-forms-frontend:${FORMS_GIT_REVISION}
+    ports:
+      - ${FORMS_FRONTEND_HOST_PORT}:8080
+  forms_backend:
+    image: docker.ub.gu.se/fjarrkontrollen-forms-backend:${FORMS_GIT_REVISION}
+  forms_db:
+    image: docker.ub.gu.se/fjarrkontrollen-forms-postgres:${BACKEND_GIT_REVISION}
