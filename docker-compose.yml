@@ -40,7 +40,6 @@ services:
     command: ["postgres", "-c", "config_file=/etc/postgresql/postgresql.conf"]
     volumes:
       - ./postgres-initdb.d:/docker-entrypoint-initdb.d
-      - ./postgres-data:/var/lib/postgresql/data
     networks:
       - backend
   forms_frontend:
@@ -84,7 +83,6 @@ services:
     command: ["postgres", "-c", "config_file=/etc/postgresql/postgresql.conf"]
     volumes:
       - ./forms-postgres-initdb.d:/docker-entrypoint-initdb.d
-      - ./forms-postgres-data:/var/lib/postgresql/data
     networks:
       - forms_backend
 
