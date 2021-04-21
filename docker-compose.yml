@@ -8,6 +8,7 @@ services:
     stdin_open: true
     # Enable sending signals (CTRL+C, CTRL+P + CTRL+Q) into the container
     tty: true
+    restart: always
   backend:
     env_file:
       - secrets.env
@@ -31,8 +32,8 @@ services:
       - backend
     ports:
       - ${BACKEND_HOST_PORT}:${RAILS_PORT}
-  db:
     restart: always
+  db:
     environment:
       - POSTGRES_DB=${DB_NAME}
       - POSTGRES_USER=${DB_USER}
@@ -42,6 +43,7 @@ services:
       - ./postgres-initdb.d:/docker-entrypoint-initdb.d
     networks:
       - backend
+    restart: always
   forms_frontend:
     environment:
       - EMBER_ENVIRONMENT=${ENVIRONMENT}
@@ -50,6 +52,7 @@ services:
     stdin_open: true
     # Enable sending signals (CTRL+C, CTRL+P + CTRL+Q) into the container
     tty: true
+    restart: always
   forms_backend:
     depends_on:
       - db
@@ -74,8 +77,8 @@ services:
       - backend
     ports:
       - ${FORMS_BACKEND_HOST_PORT}:${RAILS_PORT}
-  forms_db:
     restart: always
+  forms_db:
     environment:
       - POSTGRES_DB=${FORMS_DB_NAME}
       - POSTGRES_USER=${FORMS_DB_USER}
@@ -85,6 +88,7 @@ services:
       - ./forms-postgres-initdb.d:/docker-entrypoint-initdb.d
     networks:
       - forms_backend
+    restart: always
 
 networks:
   backend:
