@@ -1,0 +1,50 @@
+version: '3.7'
+services:
+  frontend:
+    logging:
+      driver: syslog
+      options:
+        syslog-address: ${SYSLOG_ADDR}
+        syslog-format: ${SYSLOG_FORMAT}
+        syslog-facility: ${SYSLOG_FACILITY}
+        tag: fjarrkontrollen/frontend
+  backend:
+    logging:
+      driver: syslog
+      options:
+        syslog-address: ${SYSLOG_ADDR}
+        syslog-format: ${SYSLOG_FORMAT}
+        syslog-facility: ${SYSLOG_FACILITY}
+        tag: fjarrkontrollen/backend
+  db:
+    logging:
+      driver: syslog
+      options:
+        syslog-address: ${SYSLOG_ADDR}
+        syslog-format: ${SYSLOG_FORMAT}
+        syslog-facility: ${SYSLOG_FACILITY}
+        tag: fjarrkontrollen/db
+  forms_frontend:
+    logging:
+      driver: syslog
+      options:
+        syslog-address: ${SYSLOG_ADDR}
+        syslog-format: ${SYSLOG_FORMAT}
+        syslog-facility: ${SYSLOG_FACILITY}
+        tag: fjarrkontrollen/forms_frontend
+  forms_backend:
+    logging:
+      driver: syslog
+      options:
+        syslog-address: ${SYSLOG_ADDR}
+        syslog-format: ${SYSLOG_FORMAT}
+        syslog-facility: ${SYSLOG_FACILITY}
+        tag: fjarrkontrollen/forms_backend
+  forms_db:
+    logging:
+      driver: syslog
+      options:
+        syslog-address: ${SYSLOG_ADDR}
+        syslog-format: ${SYSLOG_FORMAT}
+        syslog-facility: ${SYSLOG_FACILITY}
+        tag: fjarrkontrollen/forms_db

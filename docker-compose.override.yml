@@ -3,7 +3,7 @@ version: '3.7'
 services:
   frontend:
     image: docker.ub.gu.se/ember-dev:3.14.0
-    environment:
+    environemnt:
       - BACKEND_SERVICE_PORT=${BACKEND_HOST_PORT}
     ports:
       # server
