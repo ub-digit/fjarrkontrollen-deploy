@@ -1,6 +1,8 @@
 secrets.env
 postgres-data/*
-forms-postgres-data/*
 !postgres-data/.gitkeep
+forms-postgres-data/*
 !forms-postgres-data/.gitkeep
+export-data/*
+!export-data/.gitkeep
 *.sql
