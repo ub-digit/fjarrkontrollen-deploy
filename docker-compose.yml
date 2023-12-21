@@ -1,6 +1,8 @@
 version: '3.7'
 services:
   frontend:
+    env_file:
+      - secrets.env
     environment:
       - EMBER_ENVIRONMENT=${ENVIRONMENT}
     # Keep the stdin open, so we can attach to our app container's process
@@ -51,6 +53,8 @@ services:
       - backend
     restart: always
   forms_frontend:
+    env_file:
+      - secrets.env
     environment:
       - EMBER_ENVIRONMENT=${ENVIRONMENT}
     # Keep the stdin open, so we can attach to our app container's process

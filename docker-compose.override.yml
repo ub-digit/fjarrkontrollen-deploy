@@ -5,6 +5,7 @@ services:
     image: docker.ub.gu.se/ember-dev:3.28.6
     environment:
       - BACKEND_SERVICE_PORT=${BACKEND_HOST_PORT}
+      - FRONTEND_PORT=${FRONTEND_HOST_PORT}
     ports:
       # server
       - ${FRONTEND_HOST_PORT}:4200
@@ -16,8 +17,6 @@ services:
       - ${FJARRKONTROLLEN_FRONTEND_REPO}:/home/node/app
   backend:
     image: docker.ub.gu.se/rails:ruby-3.2.2
-    env_file:
-      - secrets.env
     volumes:
       - $FJARRKONTROLLEN_BACKEND_REPO:/usr/src/app
     command: ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
@@ -30,6 +29,7 @@ services:
     environment:
       - FORMS_CAS_URL=http://localhost:8383/cas
       - BACKEND_SERVICE_PORT=${FORMS_BACKEND_HOST_PORT}
+      - FRONTEND_PORT=${FORMS_FRONTEND_HOST_PORT}
       - FJARRKONTROLLEN_BACKEND_SERVICE_PORT=${BACKEND_HOST_PORT}
     ports:
       # server
@@ -43,8 +43,6 @@ services:
       - ${FJARRKONTROLLEN_FORMS_REPO}/frontend:/home/node/app
   forms_backend:
     image: docker.ub.gu.se/rails:ruby-3.2.2
-    env_file:
-      - secrets.env
     environment:
       - FORMS_CAS_URL=http://cas:8080/cas
     volumes:
