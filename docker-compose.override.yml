@@ -5,6 +5,7 @@ services:
     image: docker.ub.gu.se/ember-dev:3.28.6
     environment:
       - BACKEND_SERVICE_PORT=${BACKEND_HOST_PORT}
+      - FRONTEND_PORT=${FRONTEND_HOST_PORT}
     ports:
       # server
       - ${FRONTEND_HOST_PORT}:4200
@@ -28,9 +29,9 @@ services:
   forms_frontend:
     image: docker.ub.gu.se/ember-dev:3.14.0
     environment:
-      - FORMS_CAS_URL=http://localhost:8383/cas
       - BACKEND_SERVICE_PORT=${FORMS_BACKEND_HOST_PORT}
       - FJARRKONTROLLEN_BACKEND_SERVICE_PORT=${BACKEND_HOST_PORT}
+      - FRONTEND_PORT=${FORMS_FRONTEND_HOST_PORT}
     ports:
       # server
       - ${FORMS_FRONTEND_HOST_PORT}:4200
@@ -45,8 +46,6 @@ services:
     image: docker.ub.gu.se/rails:ruby-3.2.2
     env_file:
       - secrets.env
-    environment:
-      - FORMS_CAS_URL=http://cas:8080/cas
     volumes:
       - $FJARRKONTROLLEN_FORMS_REPO:/usr/src/app
     command: ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
@@ -54,13 +53,6 @@ services:
     image: postgres:9.4
     volumes:
       - $FJARRKONTROLLEN_FORMS_REPO/docker/build/postgres/postgres.conf:/etc/postgresql/postgresql.conf
-  cas:
-    image: soulwing/cas-mock-server
-    ports:
-      - 8383:8080
-    networks:
-      - forms_backend
-      - backend
   mailpit:
     image: axllent/mailpit
     ports:
