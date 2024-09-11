@@ -46,6 +46,8 @@ services:
     image: docker.ub.gu.se/rails:ruby-3.2.2
     env_file:
       - secrets.env
+    environment:
+      - FRONTEND_HOSTNAME=http://localhost:${FRONTEND_HOST_PORT}
     volumes:
       - $FJARRKONTROLLEN_FORMS_REPO:/usr/src/app
     command: ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
