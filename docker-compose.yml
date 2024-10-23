@@ -22,7 +22,6 @@ services:
     environment:
       - RAILS_ENV=${ENVIRONMENT}
       - RAILS_PORT=${RAILS_PORT}
-      - RAILS_SECRET_KEY_BASE=${RAILS_SECRET_KEY_BASE}
       - RAILS_DB_HOST=${DB_HOST}
       - RAILS_DB_PORT=${DB_PORT}
       - RAILS_DB=${DB_NAME}
@@ -79,7 +78,6 @@ services:
     environment:
       - RAILS_ENV=${ENVIRONMENT}
       - RAILS_PORT=${RAILS_PORT}
-      - RAILS_SECRET_KEY_BASE=${RAILS_SECRET_KEY_BASE}
       - RAILS_DB_HOST=${FORMS_DB_HOST}
       - RAILS_DB_PORT=${FORMS_DB_PORT}
       - RAILS_DB=${FORMS_DB_NAME}
