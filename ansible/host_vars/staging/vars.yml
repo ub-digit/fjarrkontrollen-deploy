@@ -1,0 +1,35 @@
+---
+git_revision: release-2024.10.006
+docker_command: ./docker-compose-release-mailpit.sh
+env_variables:
+  FRONTEND_GIT_REVISION: release-2024.10.001
+  BACKEND_GIT_REVISION: release-2024.10.003
+  FORMS_GIT_REVISION: release-2024.09.001
+  FRONTEND_HOST_PORT: 127.0.0.1:20210
+  BACKEND_HOST_PORT: 127.0.0.1:20211
+  FORMS_FRONTEND_HOST_PORT: 127.0.0.1:20220
+  FORMS_BACKEND_HOST_PORT: 127.0.0.1:20221
+  MAILPIT_HOST_PORT: 127.0.0.1:20212
+  FJARRKONTROLLEN_GUB_OAUTH2_CLIENT_ID: baa1b536-9b65-403d-be1a-10eae7d13248
+  FORMS_GUB_OAUTH2_CLIENT_ID: 484546ce-0fb8-450d-b198-f5d70e715816
+  BACKEND_EMAIL_SUBJECT_PREFIX: 'TEST:'
+  BACKEND_HOSTNAME: fjarrkontrollen-server-staging.ub.gu.se
+  FRONTEND_HOSTNAME: fjarrkontrollen-staging.ub.gu.se
+  FORMS_FRONTEND_HOSTNAME: fjarrlan-staging.ub.gu.se
+  FORMS_BACKEND_HOSTNAME: fjarrlan-server-staging.ub.gu.se
+  KOHA_SVC_URL: https://koha-staging-intra.ub.gu.se/cgi-bin/koha/svc
+  KOHA_SEARCH_URL: https://koha-staging-intra.ub.gu.se/cgi-bin/koha/catalogue/search.pl?q=
+  BIBLIOTEKSKORT_SERVICE_URL: https://bibliotekskort-staging.ub.gu.se
+  SMTP_SERVER: mailpit
+  SMTP_PORT: 1025
+  SYSLOG_ADDR: udp://127.0.0.1:514
+  SYSLOG_FORMAT: rfc5424
+  SYSLOG_FACILITY: local2
+  BACKEND_ACCESS_TOKEN: "{{ vault_backend_access_token }}"
+secret_env_variables:
+  ILL_KOHA_PASSWORD: "{{ vault_ill_koha_password }}"
+  FORMS_KOHA_PASSWORD: "{{ vault_forms_koha_password }}"
+  FJARRKONTROLLEN_GUB_OAUTH2_CLIENT_SECRET:  "{{ vault_fjarrkontrollen_gub_oauth2_client_secret }}"
+  FORMS_GUB_OAUTH2_CLIENT_SECRET: "{{ vault_forms_gub_oauth2_client_secret }}"
+  ILL_LIBRISILL_API_KEY: "{{ vault_ill_librisill_api_key }}"
+  RAILS_SECRET_KEY_BASE: "{{ vault_secret_key_base }}"
