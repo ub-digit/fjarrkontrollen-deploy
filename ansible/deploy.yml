@@ -1,0 +1,38 @@
+---
+- name: Deploy
+  hosts: all
+  roles:
+    - ub-ansible-deploy
+  pre_tasks:
+  - name: Include default environment variables
+    ansible.builtin.include_vars:
+      file: default_env_variables.yml
+      name: env_variables
+      hash_behaviour: merge
+  - name: Ensure data directory
+    become: yes
+    ansible.builtin.file:
+      path: /data/fjarrkontrollen
+      state: directory
+      owner: "{{ ansible_user }}"
+      group: "{{ ansible_user }}"
+      mode: '755'
+  - name: Ensure db directies
+    become: yes
+    ansible.builtin.file:
+      path: '/data/fjarrkontrollen/{{ item }}'
+      state: directory
+      owner: "{{ ansible_user }}"
+      group: "{{ ansible_user }}"
+      mode: '755'
+    loop:
+      - db
+      - forms_db
+  - name: Ensure files directory
+    become: yes
+    ansible.builtin.file:
+      path: /data/fjarrkontrollen/files
+      state: directory
+      owner: root
+      group: root
+      mode: '755'

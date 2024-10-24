@@ -1,8 +1,12 @@
 version: '3.7'
+name: 'fjarrkontrollen'
 services:
   frontend:
     environment:
       - EMBER_ENVIRONMENT=${ENVIRONMENT}
+      - UV_USE_IO_URING=0
+      - GUB_OAUTH2_AUTHORIZE_ENDPOINT=${GUB_OAUTH2_AUTHORIZE_ENDPOINT}
+      - GUB_OAUTH2_CLIENT_ID=${FJARRKONTROLLEN_GUB_OAUTH2_CLIENT_ID}
     # Keep the stdin open, so we can attach to our app container's process
     # and do things such as debugging, etc
     stdin_open: true
@@ -10,6 +14,7 @@ services:
     tty: true
     restart: always
   backend:
+    privileged: true
     env_file:
       - secrets.env
     depends_on:
@@ -17,7 +22,6 @@ services:
     environment:
       - RAILS_ENV=${ENVIRONMENT}
       - RAILS_PORT=${RAILS_PORT}
-      - RAILS_SECRET_KEY_BASE=${RAILS_SECRET_KEY_BASE}
       - RAILS_DB_HOST=${DB_HOST}
       - RAILS_DB_PORT=${DB_PORT}
       - RAILS_DB=${DB_NAME}
@@ -32,6 +36,10 @@ services:
       - ILL_LIBRISILL_BASE_URL=${ILL_LIBRISILL_BASE_URL}
       - ILL_SMTP_SERVER=${SMTP_SERVER}
       - ILL_SMTP_PORT=${SMTP_PORT}
+      - GUB_OAUTH2_PROVIDER=${GUB_OAUTH2_PROVIDER}
+      - GUB_OAUTH2_CLIENT_ID=${FJARRKONTROLLEN_GUB_OAUTH2_CLIENT_ID}
+      - GUB_OAUTH2_TOKEN_ENDPOINT=${GUB_OAUTH2_TOKEN_ENDPOINT}
+      - GUB_OAUTH2_USER_ENDPOINT=${GUB_OAUTH2_USER_ENDPOINT}
     networks:
       - backend
     volumes:
@@ -53,6 +61,8 @@ services:
   forms_frontend:
     environment:
       - EMBER_ENVIRONMENT=${ENVIRONMENT}
+      - GUB_OAUTH2_AUTHORIZE_ENDPOINT=${GUB_OAUTH2_AUTHORIZE_ENDPOINT}
+      - GUB_OAUTH2_CLIENT_ID=${FORMS_GUB_OAUTH2_CLIENT_ID}
     # Keep the stdin open, so we can attach to our app container's process
     # and do things such as debugging, etc
     stdin_open: true
@@ -60,6 +70,7 @@ services:
     tty: true
     restart: always
   forms_backend:
+    privileged: true
     depends_on:
       - db
     env_file:
@@ -67,7 +78,6 @@ services:
     environment:
       - RAILS_ENV=${ENVIRONMENT}
       - RAILS_PORT=${RAILS_PORT}
-      - RAILS_SECRET_KEY_BASE=${RAILS_SECRET_KEY_BASE}
       - RAILS_DB_HOST=${FORMS_DB_HOST}
       - RAILS_DB_PORT=${FORMS_DB_PORT}
       - RAILS_DB=${FORMS_DB_NAME}
@@ -77,6 +87,10 @@ services:
       - FJARRKONTROLLEN_SERVER_ACCESS_TOKEN=${BACKEND_ACCESS_TOKEN}
       - FORMS_KOHA_SVC_URL=${KOHA_SVC_URL}
       - FORMS_KOHA_USER=${KOHA_USER}
+      - GUB_OAUTH2_PROVIDER=${GUB_OAUTH2_PROVIDER}
+      - GUB_OAUTH2_CLIENT_ID=${FORMS_GUB_OAUTH2_CLIENT_ID}
+      - GUB_OAUTH2_TOKEN_ENDPOINT=${GUB_OAUTH2_TOKEN_ENDPOINT}
+      - GUB_OAUTH2_USER_ENDPOINT=${GUB_OAUTH2_USER_ENDPOINT}
     networks:
       - forms_backend
       - backend
