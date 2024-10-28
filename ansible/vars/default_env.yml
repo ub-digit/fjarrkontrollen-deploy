@@ -1,0 +1,22 @@
+---
+FRONTEND_GIT_REVISION: '{{ frontend_git_revision }}'
+BACKEND_GIT_REVISION: '{{ backend_git_revision }}'
+FORMS_GIT_REVISION: '{{ forms_git_revision }}'
+FRONTEND_HOST_PORT: '127.0.0.1:{{ frontend_host_port }}'
+BACKEND_HOST_PORT: '127.0.0.1:{{ backend_host_port}}'
+FORMS_FRONTEND_HOST_PORT: '127.0.0.1:{{ forms_frontend_host_port }}'
+FORMS_BACKEND_HOST_PORT: '127.0.0.1:{{ forms_backend_host_port}}'
+MAILPIT_HOST_PORT: '127.0.0.1:{{ mailpit_host_port }}'
+BACKEND_HOSTNAME: '{{ backend_hostname }}'
+FRONTEND_HOSTNAME: '{{ frontend_hostname }}'
+FORMS_FRONTEND_HOSTNAME: '{{ forms_frontend_hostname }}'
+FORMS_BACKEND_HOSTNAME: '{{ forms_backend_hostname }}'
+ENVIRONMENT: production
+GUB_OAUTH2_PROVIDER: gu
+GUB_OAUTH2_AUTHORIZE_ENDPOINT: https://idp.auth.gu.se/adfs/oauth2/authorize/
+GUB_OAUTH2_TOKEN_ENDPOINT: https://idp.auth.gu.se/adfs/oauth2/token/
+GUB_OAUTH2_USER_ENDPOINT: https://idp.auth.gu.se/adfs/userinfo
+MAILPIT_USER: admin
+MAILPIT_PASS: fjarrkontrollenadmin
+SMTP_SERVER: mailpit
+SMTP_PORT: 1025

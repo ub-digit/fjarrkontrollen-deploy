@@ -1,32 +1,15 @@
 ---
 git_revision: upgrade-rails-and-ember
+frontend_git_revision: release-2024.10.001
+backend_git_revision: release-2024.10.003
+forms_git_revision: release-2024.09.001
 docker_command: ./docker-compose-release-mailpit.sh
-env_variables:
-  FRONTEND_GIT_REVISION: release-2024.10.001
-  BACKEND_GIT_REVISION: release-2024.10.003
-  FORMS_GIT_REVISION: release-2024.09.001
-  FRONTEND_HOST_PORT: 127.0.0.1:30210
-  BACKEND_HOST_PORT: 127.0.0.1:30211
-  FORMS_FRONTEND_HOST_PORT: 127.0.0.1:30220
-  FORMS_BACKEND_HOST_PORT: 127.0.0.1:30221
-  MAILPIT_HOST_PORT: 127.0.0.1:30212
-  FJARRKONTROLLEN_GUB_OAUTH2_CLIENT_ID: f40c897a-4ce2-4a4e-9c6f-7390332e5a3b
-  FORMS_GUB_OAUTH2_CLIENT_ID: 169fc014-148b-42d8-bee9-88cda1f454ff
-  BACKEND_EMAIL_SUBJECT_PREFIX: 'TEST:'
-  BACKEND_HOSTNAME: fjarrkontrollen-server-lab.ub.gu.se
-  FRONTEND_HOSTNAME: fjarrkontrollen-lab.ub.gu.se
-  FORMS_FRONTEND_HOSTNAME: fjarrlan-lab.ub.gu.se
-  FORMS_BACKEND_HOSTNAME: fjarrlan-server-lab.ub.gu.se
-  KOHA_SVC_URL: https://koha-lab-intra.ub.gu.se/cgi-bin/koha/svc
-  KOHA_SEARCH_URL: https://koha-lab-intra.ub.gu.se/cgi-bin/koha/catalogue/search.pl?q=
-  BIBLIOTEKSKORT_SERVICE_URL: https://bibliotekskort-lab.ub.gu.se
-  SMTP_SERVER: mailpit
-  SMTP_PORT: '1025'
-  BACKEND_ACCESS_TOKEN: "{{ vault_backend_access_token }}"
-secret_env_variables:
-  ILL_KOHA_PASSWORD: "{{ vault_ill_koha_password }}"
-  FORMS_KOHA_PASSWORD: "{{ vault_forms_koha_password }}"
-  FJARRKONTROLLEN_GUB_OAUTH2_CLIENT_SECRET:  "{{ vault_fjarrkontrollen_gub_oauth2_client_secret }}"
-  FORMS_GUB_OAUTH2_CLIENT_SECRET: "{{ vault_forms_gub_oauth2_client_secret }}"
-  ILL_LIBRISILL_API_KEY: "{{ vault_ill_librisill_api_key }}"
-  RAILS_SECRET_KEY_BASE: "{{ vault_rails_secret_key_base }}"
+frontend_host_port: 30210
+backend_host_port: 30211
+forms_frontend_host_port: 30220
+forms_backend_host_port: 30221
+mailpit_host_port: 30212
+backend_hostname: fjarrkontrollen-server-lab.ub.gu.se
+frontend_hostname: fjarrkontrollen-lab.ub.gu.se
+forms_frontend_hostname: fjarrlan-lab.ub.gu.se
+forms_backend_hostname: fjarrlan-server-lab.ub.gu.se
