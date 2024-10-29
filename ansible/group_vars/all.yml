@@ -1,2 +1,3 @@
 ---
 git_repo_url: https://github.com/ub-digit/fjarrkontrollen-deploy.git
+docker_directory: './'
