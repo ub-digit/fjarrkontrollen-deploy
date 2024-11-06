@@ -1,2 +1,3 @@
 #!/bin/bash
-docker compose -f docker-compose.yml -f docker-compose.release.yml -f docker-compose.release.logging.yml -f docker-compose.mailpit.yml $@
+source ./docker-compose-detect.sh
+$DOCKER_COMPOSE -f docker-compose.yml -f docker-compose.release.yml -f docker-compose.release.logging.yml -f docker-compose.mailpit.yml $@
