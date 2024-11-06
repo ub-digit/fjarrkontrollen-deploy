@@ -14,8 +14,6 @@ services:
       - FRONTEND_HOSTNAME=${FRONTEND_HOSTNAME}
   db:
     image: docker.ub.gu.se/fjarrkontrollen-postgres:${BACKEND_GIT_REVISION}
-    volumes:
-      - ${DB_VOLUME_SOURCE}:/var/lib/postgresql/data
   forms_frontend:
     image: docker.ub.gu.se/fjarrkontrollen-forms-frontend:${FORMS_GIT_REVISION}
     environment:
@@ -30,5 +28,3 @@ services:
       - FRONTEND_HOSTNAME=${FORMS_FRONTEND_HOSTNAME}
   forms_db:
     image: docker.ub.gu.se/fjarrkontrollen-forms-postgres:${FORMS_GIT_REVISION}
-    volumes:
-      - ${FORMS_DB_VOLUME_SOURCE}:/var/lib/postgresql/data

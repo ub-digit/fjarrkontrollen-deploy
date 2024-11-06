@@ -55,6 +55,7 @@ services:
     command: ["postgres", "-c", "config_file=/etc/postgresql/postgresql.conf"]
     volumes:
       - ./postgres-initdb.d:/docker-entrypoint-initdb.d
+      - ${DB_VOLUME_SOURCE}:/var/lib/postgresql/data
     networks:
       - backend
     restart: always
@@ -105,6 +106,7 @@ services:
     command: ["postgres", "-c", "config_file=/etc/postgresql/postgresql.conf"]
     volumes:
       - ./forms-postgres-initdb.d:/docker-entrypoint-initdb.d
+      - ${FORMS_DB_VOLUME_SOURCE}:/var/lib/postgresql/data
     networks:
       - forms_backend
     restart: always
