@@ -1,0 +1,9 @@
+---
+- name: Import forms database
+  hosts: all
+  roles:
+  - role: ub-ansible-import-db
+    vars:
+      db_service: forms_db
+      database_variant: postgres
+      db_dump_filename: forms-database.sql

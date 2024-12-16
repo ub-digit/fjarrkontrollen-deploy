@@ -1,3 +1,5 @@
 .password
 .vault_password
-roles
+./roles
+./data
+!./data/.gitkeep
