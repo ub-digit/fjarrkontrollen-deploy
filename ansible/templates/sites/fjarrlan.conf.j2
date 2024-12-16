@@ -1,0 +1,26 @@
+<VirtualHost *:80>
+    ServerName fjarrlan-lab.ub.gu.se
+    Redirect permanent / https://{{ forms_frontend_hostname }}/
+</VirtualHost>
+ 
+<VirtualHost *:443>
+    ServerName {{ forms_frontend_hostname }}
+    FallbackResource /index.html
+
+    ProxyPreserveHost Off
+
+    Alias "/img/background-image.png" "/data/static/background-image.png"
+    <Directory "/data/static">
+        Require all granted
+    </Directory>
+    ProxyPass /img/background-image.png !
+
+    ProxyPass        / http://localhost:{{ forms_frontend_host_port }}/
+    ProxyPassReverse / http://localhost:{{ forms_frontend_host_port }}/
+
+    SSLEngine on
+    SSLCertificateFile /etc/ssl/apache2/certs/ub-gu-se.pem
+    SSLCertificateKeyFile /etc/ssl/apache2/private/ub-gu-se.key
+    SSLCertificateChainFile /etc/ssl/apache2/certs/interm_geant.pem
+</VirtualHost>
+
