@@ -1,5 +1,5 @@
 ---
-git_revision: upgrade-rails-and-ember
+docker_git_revision: upgrade-rails-and-ember
 frontend_git_revision: release-2024.10.001
 backend_git_revision: release-2024.10.003
 forms_git_revision: release-2024.09.001
