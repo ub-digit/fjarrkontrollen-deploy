@@ -6,47 +6,54 @@
     ansible.builtin.include_vars:
       file: default_env.yml
       name: env_variables
+
   - name: Include environment variables
     ansible.builtin.include_vars:
       file: '{{ inventory_hostname }}/env.yml'
       name: env_variables
       hash_behaviour: merge
+
   - name: Include default secret environment variables
     ansible.builtin.include_vars:
       file: default_secret_env.yml
       name: secret_env_variables
+
   - name: Include secret environment variables
     ansible.builtin.include_vars:
       file: '{{ inventory_hostname }}/secret_env.yml'
       name: secret_env_variables
       hash_behaviour: merge
+
   - name: Ensure data directory
     become: yes
     ansible.builtin.file:
-      path: /data/fjarrkontrollen
+      path: "{{ data_dir }}"
       state: directory
       owner: "{{ ansible_user }}"
       group: "{{ ansible_user }}"
       mode: '755'
+
   - name: Ensure db directies
     become: yes
     ansible.builtin.file:
-      path: '/data/fjarrkontrollen/{{ item }}'
+      path: '{{ item }}'
       state: directory
       owner: "{{ ansible_user }}"
       group: "{{ ansible_user }}"
       mode: '755'
     loop:
-      - db
-      - forms_db
-  - name: Ensure files directory
+      - "{{ db_data_dir }}"
+      - "{{ forms_db_data_dir }}"
+
+  - name: Ensure backend export directory
     become: yes
     ansible.builtin.file:
-      path: /data/fjarrkontrollen/files
+      path: "{{ backend_export_data_dir }}"
       state: directory
       owner: root
       group: root
       mode: '755'
+
   - name: Deploy app
     include_role:
       name: ub-ansible-deploy
