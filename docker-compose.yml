@@ -43,7 +43,7 @@ services:
     networks:
       - backend
     volumes:
-      - ${EXPORT_DIR}:${ILL_EXPORT_DIR}
+      - ${BACKEND_EXPORT_HOST_DIR}:${ILL_EXPORT_DIR}
     ports:
       - ${BACKEND_HOST_PORT}:${RAILS_PORT}
     restart: always

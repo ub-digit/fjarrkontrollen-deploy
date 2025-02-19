@@ -1,3 +1,8 @@
 ---
-git_repo_url: https://github.com/ub-digit/fjarrkontrollen-deploy.git
+docker_git_repo_url: https://github.com/ub-digit/fjarrkontrollen-deploy.git
 docker_directory: './'
+
+data_dir: /data/fjarrkontrollen
+db_data_dir: /data/fjarrkontrollen/db
+forms_db_data_dir: /data/fjarrkontrollen/forms_db
+backend_export_data_dir: /data/fjarrkontrollen/files

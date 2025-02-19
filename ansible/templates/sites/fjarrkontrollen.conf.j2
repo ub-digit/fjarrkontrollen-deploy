@@ -1,0 +1,33 @@
+<VirtualHost *:80>
+    ServerName {{ frontend_hostname }}
+    Redirect permanent / https://{{ frontend_hostname }}/
+</VirtualHost>
+
+<VirtualHost *:443>
+    ServerName {{ frontend_hostname }}
+    FallbackResource /index.html
+
+    ProxyPreserveHost Off
+    Alias "/img/background-image.png" "/data/static/background-image.png"
+    <Directory "/data/static">
+        Require all granted
+    </Directory>
+    ProxyPass /img/background-image.png !
+
+    ProxyPass        /mail http://localhost:{{ mailpit_host_port }}/mail
+    ProxyPassReverse /mail http://localhost:{{ mailpit_host_port }}/mail
+
+    SSLProxyEngine on
+    RewriteEngine on
+    RewriteCond %{HTTP:Upgrade} websocket [NC]
+    RewriteCond %{HTTP:Connection} upgrade [NC]
+    RewriteRule ^/?(.*) "ws://localhost:30212/$1" [P,L]
+
+    ProxyPass        / http://localhost:{{ frontend_host_port }}/
+    ProxyPassReverse / http://localhost:{{ frontend_host_port }}/
+
+    SSLEngine on
+    SSLCertificateFile /etc/ssl/apache2/certs/ub-gu-se.pem
+    SSLCertificateKeyFile /etc/ssl/apache2/private/ub-gu-se.key
+    SSLCertificateChainFile /etc/ssl/apache2/certs/interm_geant.pem
+</VirtualHost>

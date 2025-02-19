@@ -20,3 +20,8 @@ MAILPIT_USER: admin
 MAILPIT_PASS: fjarrkontrollenadmin
 SMTP_SERVER: mailpit
 SMTP_PORT: 1025
+
+
+BACKEND_EXPORT_HOST_PATH: "{{ backend_export_data_dir }}"
+DB_HOST_PATH: "{{ db_data_dir }}"
+FORMS_DB_HOST_PATH: "{{ forms_db_data_dir }}"
