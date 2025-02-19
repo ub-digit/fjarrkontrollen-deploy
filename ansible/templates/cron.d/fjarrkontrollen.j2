@@ -1,0 +1,5 @@
+00 01 * * *  (cd {{ docker_directory_path }}; ./{{ docker_command }} exec backend rake export:orders >> /var/log/fjarrkontrollen_server/export.log)
+*/30 * * * * (cd {{ docker_directory_path }}; ./{{ docker_command }} exec backend rake libris_info:neg_responses >> /var/log/fjarrkontrollen_server/neg_responses.log)
+*/30 * * * * (cd {{ docker_directory_path }}; ./{{ docker_command }} exec backend rake libris_info:user_requests >> /var/log/fjarrkontrollen_server/user_requests.log)
+00 23 * * * (cd {{ docker_directory_path }}; ./{{ docker_command }} exec backend rake order:set_cancel[4] >> /var/log/fjarrkontrollen_server/set_cancel.log)
+05 23 * * * (cd {{ docker_directory_path }}; ./{{ docker_command }} exec backend rake order:clear_data[2] >> /var/log/fjarrkontrollen_server/clear_data.log)
