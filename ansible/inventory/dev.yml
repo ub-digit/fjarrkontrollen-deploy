@@ -1,0 +1,6 @@
+---
+all:
+  hosts:
+    dev:
+      ansible_host: fjarrkontrollen-dev.ub.gu.se
+      ansible_user: apps

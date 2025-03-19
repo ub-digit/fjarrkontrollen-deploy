@@ -6,12 +6,12 @@ if [[ -z "$2" ]]; then
     exit 0;
 fi
 
-targets="staging lab production"
+targets="staging lab production dev"
 target=$1
 playbook=$2
 
 if [[ ! -e "./$playbook.yml" ]]; then
-    echo "Playbook $playbook.yml does not exist" 
+    echo "Playbook $playbook.yml does not exist"
     exit 1;
 fi
 
