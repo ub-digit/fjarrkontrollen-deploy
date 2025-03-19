@@ -1,0 +1,15 @@
+---
+docker_git_revision: master
+frontend_git_revision: release-2024.10.001
+backend_git_revision: release-2024.10.003
+forms_git_revision: release-2024.09.001
+docker_command: ./docker-compose-release-mailpit.sh
+frontend_host_port: 40210
+backend_host_port: 40211
+forms_frontend_host_port: 40220
+forms_backend_host_port: 40221
+mailpit_host_port: 40212
+backend_hostname: fjarrkontrollen-server-dev.ub.gu.se
+frontend_hostname: fjarrkontrollen-dev.ub.gu.se
+forms_frontend_hostname: fjarrlan-dev.ub.gu.se
+forms_backend_hostname: fjarrlan-server-dev.ub.gu.se
