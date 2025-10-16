@@ -1,5 +1,5 @@
-version: '3.7'
-name: 'fjarrkontrollen'
+version: "3.7"
+name: "fjarrkontrollen"
 services:
   frontend:
     environment:
@@ -40,6 +40,7 @@ services:
       - GUB_OAUTH2_CLIENT_ID=${FJARRKONTROLLEN_GUB_OAUTH2_CLIENT_ID}
       - GUB_OAUTH2_TOKEN_ENDPOINT=${GUB_OAUTH2_TOKEN_ENDPOINT}
       - GUB_OAUTH2_USER_ENDPOINT=${GUB_OAUTH2_USER_ENDPOINT}
+      - FORMS_BACKEND_URL=http://forms_backend:${RAILS_PORT}
     networks:
       - backend
     volumes:
