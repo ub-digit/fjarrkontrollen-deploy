@@ -14,6 +14,10 @@
     </Directory>
     ProxyPass /img/background-image.png !
 
+{% if inventory_hostname != 'production' %}
+
+    # Mailpit for non production environments
+
     ProxyPass        /mail http://localhost:{{ mailpit_host_port }}/mail
     ProxyPassReverse /mail http://localhost:{{ mailpit_host_port }}/mail
 
@@ -21,7 +25,9 @@
     RewriteEngine on
     RewriteCond %{HTTP:Upgrade} websocket [NC]
     RewriteCond %{HTTP:Connection} upgrade [NC]
-    RewriteRule ^/?(.*) "ws://localhost:30212/$1" [P,L]
+    RewriteRule ^/?(.*) "ws://localhost:{{ mailpit_host_port }}/$1" [P,L]
+
+{% endif %}
 
     ProxyPass        / http://localhost:{{ frontend_host_port }}/
     ProxyPassReverse / http://localhost:{{ frontend_host_port }}/

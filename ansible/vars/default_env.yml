@@ -17,7 +17,7 @@ GUB_OAUTH2_AUTHORIZE_ENDPOINT: https://idp.auth.gu.se/adfs/oauth2/authorize/
 GUB_OAUTH2_TOKEN_ENDPOINT: https://idp.auth.gu.se/adfs/oauth2/token/
 GUB_OAUTH2_USER_ENDPOINT: https://idp.auth.gu.se/adfs/userinfo
 MAILPIT_USER: admin
-MAILPIT_PASS: fjarrkontrollenadmin
+MAILPIT_PASS: fjarrkontrollenadmin #TODO: FIX< SHOULD BE SECRET!
 SMTP_SERVER: mailpit
 SMTP_PORT: 1025
 
