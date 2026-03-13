@@ -59,6 +59,11 @@ services:
     networks:
       - backend
     restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
   forms_frontend:
     environment:
       - EMBER_ENVIRONMENT=${ENVIRONMENT}
@@ -110,7 +115,11 @@ services:
     networks:
       - forms_backend
     restart: always
-
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${FORMS_DB_USER} -d ${FORMS_DB_NAME}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 networks:
   backend:
   forms_backend:
