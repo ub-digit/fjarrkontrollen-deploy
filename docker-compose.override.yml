@@ -1,4 +1,3 @@
-# try messing with stdin_open and tty to find out correct setting
 version: '3.7'
 services:
   frontend:

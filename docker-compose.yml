@@ -7,11 +7,6 @@ services:
       - UV_USE_IO_URING=0
       - GUB_OAUTH2_AUTHORIZE_ENDPOINT=${GUB_OAUTH2_AUTHORIZE_ENDPOINT}
       - GUB_OAUTH2_CLIENT_ID=${FJARRKONTROLLEN_GUB_OAUTH2_CLIENT_ID}
-    # Keep the stdin open, so we can attach to our app container's process
-    # and do things such as debugging, etc
-    stdin_open: true
-    # Enable sending signals (CTRL+C, CTRL+P + CTRL+Q) into the container
-    tty: true
     restart: always
   backend:
     privileged: true
@@ -69,11 +64,6 @@ services:
       - EMBER_ENVIRONMENT=${ENVIRONMENT}
       - GUB_OAUTH2_AUTHORIZE_ENDPOINT=${GUB_OAUTH2_AUTHORIZE_ENDPOINT}
       - GUB_OAUTH2_CLIENT_ID=${FORMS_GUB_OAUTH2_CLIENT_ID}
-    # Keep the stdin open, so we can attach to our app container's process
-    # and do things such as debugging, etc
-    stdin_open: true
-    # Enable sending signals (CTRL+C, CTRL+P + CTRL+Q) into the container
-    tty: true
     restart: always
   forms_backend:
     privileged: true
