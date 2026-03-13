@@ -1,8 +1,23 @@
 ---
 docker_git_repo_url: https://github.com/ub-digit/fjarrkontrollen-deploy.git
+docker_git_revision: master
 docker_directory: './'
 
 data_dir: /data/fjarrkontrollen
-db_data_dir: /data/fjarrkontrollen/db
-forms_db_data_dir: /data/fjarrkontrollen/forms_db
-backend_export_data_dir: /data/fjarrkontrollen/files
+data_dirs:
+  db_data_dir:
+    path: /data/fjarrkontrollen/db
+    owner: 999
+    group: 999
+    push: false
+    pull: false
+  forms_db_data_dir:
+    path: /data/fjarrkontrollen/forms_db
+    owner: 999
+    group: 999
+    push: false
+    pull: false
+  backend_export_data_dir:
+    path: /data/fjarrkontrollen/files
+    push: true
+    pull: true

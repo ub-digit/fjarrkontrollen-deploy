@@ -22,8 +22,8 @@ SMTP_SERVER: mailpit
 SMTP_PORT: 1025
 
 
-BACKEND_EXPORT_HOST_DIR: "{{ backend_export_data_dir }}"
-DB_HOST_DIR: "{{ db_data_dir }}"
-FORMS_DB_HOST_DIR: "{{ forms_db_data_dir }}"
+BACKEND_EXPORT_HOST_DIR: "{{ data_dirs.backend_export_data_dir.path }}"
+DB_HOST_DIR: "{{ data_dirs.db_data_dir.path }}"
+FORMS_DB_HOST_DIR: "{{ data_dirs.forms_db_data_dir.path }}"
 
 BACKEND_ACCESS_TOKEN: "{{ vault_backend_access_token }}"

@@ -1,8 +1,7 @@
 ---
-docker_git_revision: upgrade-rails-and-ember
 frontend_git_revision: release-2024.10.001
-backend_git_revision: release-2024.10.003
-forms_git_revision: release-2024.09.001
+backend_git_revision: ecs-logging-v2
+forms_git_revision: ecs-logging-v2
 docker_command: ./docker-compose-release-mailpit.sh
 frontend_host_port: 30210
 backend_host_port: 30211
