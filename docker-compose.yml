@@ -1,5 +1,5 @@
-version: '3.7'
-name: 'fjarrkontrollen'
+version: "3.7"
+name: "fjarrkontrollen"
 services:
   frontend:
     environment:
@@ -37,8 +37,8 @@ services:
       - GUB_OAUTH2_USER_ENDPOINT=${GUB_OAUTH2_USER_ENDPOINT}
     networks:
       - backend
-    volumes:
-      - ${BACKEND_EXPORT_HOST_DIR}:${ILL_EXPORT_DIR}
+    ##volumes:
+    ##- ${BACKEND_EXPORT_HOST_DIR}:${ILL_EXPORT_DIR}
     ports:
       - ${BACKEND_HOST_PORT}:${RAILS_PORT}
     restart: always
@@ -87,6 +87,7 @@ services:
       - GUB_OAUTH2_CLIENT_ID=${FORMS_GUB_OAUTH2_CLIENT_ID}
       - GUB_OAUTH2_TOKEN_ENDPOINT=${GUB_OAUTH2_TOKEN_ENDPOINT}
       - GUB_OAUTH2_USER_ENDPOINT=${GUB_OAUTH2_USER_ENDPOINT}
+      - FORMS_ALERT_URL=${FORMS_ALERT_URL}
     networks:
       - forms_backend
       - backend
