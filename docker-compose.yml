@@ -37,8 +37,8 @@ services:
       - GUB_OAUTH2_USER_ENDPOINT=${GUB_OAUTH2_USER_ENDPOINT}
     networks:
       - backend
-    ##volumes:
-    ##- ${BACKEND_EXPORT_HOST_DIR}:${ILL_EXPORT_DIR}
+    volumes:
+      - ${BACKEND_EXPORT_HOST_DIR}:${ILL_EXPORT_DIR}
     ports:
       - ${BACKEND_HOST_PORT}:${RAILS_PORT}
     restart: always

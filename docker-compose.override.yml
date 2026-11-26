@@ -17,8 +17,6 @@ services:
       - 7020:7020
       # Tests in browser
       - 7357:7357
-    #command: ["ember", "serve", "--host", "0.0.0.0"]
-
     volumes:
       - ${FJARRKONTROLLEN_FRONTEND_REPO}:/home/node/app
   backend:
